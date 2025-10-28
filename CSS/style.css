@@ -1,0 +1,263 @@
+/* ============================
+   Variáveis de tema
+============================ */
+:root {
+  --cor-primaria: #800020;
+  --cor-secundaria: #FFD700;
+  --cor-clara: #F5F5F5;
+  --cor-escura: #4B0012;
+  --cor-texto: #333;
+  --cor-fundo: #fff;
+  --cor-btn: #007BFF;
+  --cor-btn-hover: #0056b3;
+  --cor-foco: #ffcc00;
+  --borda-radius: 8px;
+  --sombra: 0 2px 5px rgba(128, 0, 32, 0.2);
+}
+
+/* ============================
+   Navegação suave
+============================ */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================
+   Estilo base
+============================ */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================
+   Cabeçalho
+============================ */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--cor-primaria);
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.carro-logo {
+  height: 60px;
+  animation: pulse 1.5s infinite;
+}
+
+.titulo-site {
+  color: var(--cor-secundaria);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+/* ============================
+   Menu
+============================ */
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.menu li a {
+  color: var(--cor-secundaria);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.menu li a:hover,
+.menu li a:focus-visible {
+  color: #ffffff;
+  outline: 2px solid var(--cor-foco);
+  outline-offset: 2px;
+}
+
+/* ============================
+   Seções
+============================ */
+section {
+  padding: 2rem;
+  background-color: var(--cor-clara);
+  color: var(--cor-escura);
+}
+
+section h2 {
+  font-size: 2rem;
+  color: var(--cor-primaria);
+  margin-bottom: 1rem;
+}
+
+section p,
+section h3 {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* ============================
+   Botões
+============================ */
+button,
+.btn {
+  background-color: var(--cor-btn);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--cor-btn-hover);
+}
+
+button:focus-visible,
+.card:focus-visible {
+  outline: 2px solid var(--cor-foco);
+  outline-offset: 2px;
+}
+
+/* ============================
+   Cards
+============================ */
+.cards,
+.card-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.card {
+  background-color: #fff;
+  border: 2px solid #DAA520;
+  padding: 1rem;
+  border-radius: var(--borda-radius);
+  min-width: 200px;
+  text-align: center;
+  box-shadow: var(--sombra);
+  flex-shrink: 0;
+}
+
+.card h3 {
+  color: var(--cor-primaria);
+}
+
+/* ============================
+   Listas
+============================ */
+.valores-lista {
+  list-style: disc;
+  padding-left: 2rem;
+  color: var(--cor-escura);
+}
+
+/* ============================
+   Slogan
+============================ */
+.slogan {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--cor-secundaria);
+  margin-top: 1rem;
+}
+
+/* ============================
+   Rodapé
+============================ */
+footer {
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+/* ============================
+   Animação
+============================ */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ============================
+   Preferência de acessibilidade
+============================ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================
+   Responsividade
+============================ */
+@media (max-width: 768px) {
+  .card {
+    min-width: 150px;
+    padding: 15px;
+  }
+
+  button,
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .menu {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    min-width: 120px;
+    padding: 10px;
+  }
+
+  button,
+  .btn {
+    width: 100%;
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================
+   Modo alto contraste
+============================ */
+.high-contrast {
+  background-color: black;
+  color: yellow;
+}
+
+.high-contrast button,
+.high-contrast .btn {
+  background-color: yellow;
+  color: black;
+}
