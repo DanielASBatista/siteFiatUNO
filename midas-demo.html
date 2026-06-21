@@ -2,36 +2,241 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Demonstração - Projeto MIDAS</title>
-  <link rel="stylesheet" href="CSS/style.css" />
+  <title>Projeto Midas</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="CSS/estilo.css">
 </head>
+
 <body>
-  <header>
-    <h1>Demonstração do Projeto MIDAS</h1>
-  </header>
+<div class="lado-esquerdo">
+      <header>
+        <h1>Demonstração do Projeto MIDAS</h1>
+      </header>
 
-  <section class="demo-box">
-    <h2>Como funciona?</h2>
-    <p>
-      O MIDAS é uma plataforma inteligente para gerenciamento de solicitações e incidentes. A ferramenta permite:
-      <br><br>
-      - Comunicação centralizada<br>
-      - Identificação de recorrência e sugestão de soluções<br>
-      - Notificações personalizadas<br>
-      - Controle de ciclo de vida da ocorrência<br>
-      - Relatórios analíticos em tempo real<br><br>
-      Tudo isso com foco em acessibilidade e experiência do usuário.
-    </p>
-    <a href="paginainicial.html" class="btn">Voltar para a página da empresa</a>
-  </section>
-
-  <section class="vote-box">
-    <h2>Gostou da ferramenta?</h2>
-    <button class="btn" onclick="registrarVoto()">Votar 👍</button>
-    <div class="vote-count" id="contadorVotos">Votos: 0</div>
-  </section>
-
+      <section class="demo-box">
+        <h2>Como funciona?</h2>
+        <p>
+          O MIDAS é uma plataforma inteligente para gerenciamento de solicitações e incidentes. A ferramenta permite:
+          <br><br>
+          - Comunicação centralizada<br>
+          - Identificação de recorrência e sugestão de soluções<br>
+          - Notificações personalizadas<br>
+          - Controle de ciclo de vida da ocorrência<br>
+          - Relatórios analíticos em tempo real<br><br>
+          Tudo isso com foco em acessibilidade e experiência do usuário.
+        </p>
+        <a href="paginainicial.html" class="btn">Voltar para a página da empresa</a>
+      </section>
+    </div>
+<div class="lado-direito">
+      <section class="vote-box">
+        <h2>Gostou da ferramenta?</h2>
+        <button class="btn" onclick="registrarVoto()">Votar 👍</button>
+        <div class="vote-count" id="contadorVotos">Votos: 0</div>
+      </section>
+    </div>
   <script src="JS/script.js"></script>
+  <div class="menu-fixo-superior">
+  </div>
+
+  <div id="mobile-container">
+    <h1>Projeto Midas</h1>
+
+    <div id="cadastro" class="section">
+      <h2>Cadastro</h2>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" />
+      <label for="ocupacao">Ocupação:</label>
+      <select id="ocupacao">
+        <option value="Empresário">Empresário</option>
+        <option value="Autônomo">Autônomo</option>
+        <option value="Estudante">Estudante</option>
+      </select>
+      <button class="calc" onclick="salvarCadastro()">Salvar Cadastro</button>
+    </div>
+
+    <div id="receita" class="section">
+      <h2>Receita</h2>
+      <label for="tipoReceita">Tipo de Receita:</label>
+      <input type="text" id="tipoReceita" />
+      <label for="valorReceita">Valor (R$):</label>
+      <input type="number" id="valorReceita" />
+      <label for="dataReceita">Data:</label>
+      <input type="date" id="dataReceita" />
+      <button class="calc" onclick="salvarReceita()">Salvar Receita</button>
+      <button class="calc" onclick="zerarReceitas()">Zerar Receita</button>
+    </div>
+
+    <div id="despesa" class="section">
+      <h2>Despesa</h2>
+      <label for="tipoDespesa">Tipo de Despesa:</label>
+      <input type="text" id="tipoDespesa" />
+      <label for="valorDespesa">Valor (R$):</label>
+      <input type="number" id="valorDespesa" />
+      <label for="dataDespesa">Data:</label>
+      <input type="date" id="dataDespesa" />
+      <button class="calc" onclick="salvarDespesa()">Salvar Despesa</button>
+      <button class="calc" onclick="zerarDespesas()">Zerar Despesa</button>
+    </div>
+
+    <div id="emprestimo" class="section">
+      <h2>Empréstimo</h2>
+      <label for="montante">Montante Emprestado (R$):</label>
+      <input type="number" id="montante" />
+      <label for="parcela">Valor da Parcela (R$):</label>
+      <input type="number" id="parcela" />
+      <label for="prazo">Prazo (meses):</label>
+      <input type="number" id="prazo" />
+      <button class="calc" onclick="calcularTaxa()">Calcular Taxa de Juros</button>
+      <div class="output" id="resultadoEmprestimo"></div>
+    </div>
+
+    <div id="simulacao" class="section">
+      <h2>Simulação</h2>
+      <label for="periodoInicio">Início do Período:</label>
+      <input type="date" id="periodoInicio" />
+      <label for="periodoFim">Fim do Período:</label>
+      <input type="date" id="periodoFim" />
+      <button class="calc" onclick="gerarSimulacao()">Gerar Simulação</button>
+      <div class="output" id="resumoSimulacao"></div>
+      <canvas id="graficoSimulacao" width="320" height="160"></canvas>
+      <button class="calc" onclick="salvarSimulacaoComoPDF()">Exportar PDF</button>
+      <button class="calc" onclick="zerarSimulacao()">Zerar Simulação</button>
+    </div>
+  </div>
+
+  <div class="menu-fixo-inferior">
+    <button onclick="showSection('cadastro')" class="active">Cadastro</button>
+    <button onclick="showSection('receita')">Receita</button>
+    <button onclick="showSection('despesa')">Despesa</button>
+    <button onclick="showSection('emprestimo')">Empréstimo</button>
+    <button onclick="showSection('simulacao')">Simulação</button>
+  </div>
+
+  <script>
+    let cadastro = JSON.parse(localStorage.getItem("cadastro")) || {};
+    let receitas = JSON.parse(localStorage.getItem("receitas")) || [];
+    let despesas = JSON.parse(localStorage.getItem("despesas")) || [];
+    let emprestimo = JSON.parse(localStorage.getItem("emprestimo")) || {};
+
+    function formatarValor(valor) {
+      return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    }
+
+    function showSection(id) {
+      document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
+      document.getElementById(id).style.display = "block";
+      document.querySelectorAll(".menu-fixo-inferior button").forEach(btn => btn.classList.remove("active"));
+      event.target.classList.add("active");
+    }
+
+    showSection('cadastro');
+
+    function salvarCadastro() {
+      cadastro.nome = document.getElementById("nome").value;
+      cadastro.ocupacao = document.getElementById("ocupacao").value;
+      localStorage.setItem("cadastro", JSON.stringify(cadastro));
+      alert("Cadastro salvo!");
+    }
+
+    function salvarReceita() {
+      const tipo = document.getElementById("tipoReceita").value;
+      const valor = parseFloat(document.getElementById("valorReceita").value);
+      const data = document.getElementById("dataReceita").value;
+      if (!tipo || isNaN(valor) || !data) { alert("Preencha todos os campos de receita."); return; }
+      receitas.push({ tipo, valor, data });
+      localStorage.setItem("receitas", JSON.stringify(receitas));
+      alert("Receita salva!");
+    }
+
+    function salvarDespesa() {
+      const tipo = document.getElementById("tipoDespesa").value;
+      const valor = parseFloat(document.getElementById("valorDespesa").value);
+      const data = document.getElementById("dataDespesa").value;
+      if (!tipo || isNaN(valor) || !data) { alert("Preencha todos os campos de despesa."); return; }
+      despesas.push({ tipo, valor, data });
+      localStorage.setItem("despesas", JSON.stringify(despesas));
+      alert("Despesa salva!");
+    }
+
+    function zerarReceitas() { receitas = []; localStorage.removeItem("receitas"); alert("Receitas zeradas!"); }
+    function zerarDespesas() { despesas = []; localStorage.removeItem("despesas"); alert("Despesas zeradas!"); }
+    function zerarSimulacao() { cadastro = {}; receitas = []; despesas = []; emprestimo = {}; localStorage.clear(); alert("Simulação zerada!"); location.reload(); }
+
+    function calcularTaxa() {
+      const montante = parseFloat(document.getElementById("montante").value);
+      const parcela = parseFloat(document.getElementById("parcela").value);
+      const prazo = parseInt(document.getElementById("prazo").value);
+      if (isNaN(montante) || isNaN(parcela) || isNaN(prazo) || montante <= 0 || parcela <= 0 || prazo <= 0) {
+        document.getElementById("resultadoEmprestimo").innerHTML = '<span style="color:red;">Preencha todos os campos.</span>';
+        return;
+      }
+      emprestimo = { montante, parcela, prazo };
+      localStorage.setItem("emprestimo", JSON.stringify(emprestimo));
+      const totalPago = parcela * prazo;
+      const jurosTotal = totalPago - montante;
+      const taxaMensal = (jurosTotal / montante) / prazo * 100;
+      document.getElementById("resultadoEmprestimo").innerHTML =
+        `<strong>Resultado:</strong><br>
+        Total pago: ${formatarValor(totalPago)}<br>
+        Juros total: ${formatarValor(jurosTotal)}<br>
+        Taxa mensal: ${taxaMensal.toFixed(2)}%`;
+    }
+
+    function gerarSimulacao() {
+      const inicio = document.getElementById("periodoInicio").value;
+      const fim = document.getElementById("periodoFim").value;
+      const receitasFiltradas = receitas.filter(r => r.data >= inicio && r.data <= fim);
+      const despesasFiltradas = despesas.filter(d => d.data >= inicio && d.data <= fim);
+
+      const totalReceitas = receitasFiltradas.reduce((s, r) => s + Number(r.valor), 0);
+      const totalDespesas = despesasFiltradas.reduce((s, d) => s + Number(d.valor), 0);
+      const saldo = totalReceitas - totalDespesas;
+
+      let resumo = `<strong>Período:</strong> ${inicio} até ${fim}<br>`;
+      resumo += `<strong>Usuário:</strong> ${cadastro.nome || 'N/I'} (${cadastro.ocupacao || 'N/A'})<br><br>`;
+      resumo += `<strong>Receitas:</strong> ${formatarValor(totalReceitas)}<br>`;
+      resumo += `<strong>Despesas:</strong> ${formatarValor(totalDespesas)}<br>`;
+      resumo += `<strong>Saldo:</strong> ${formatarValor(saldo)}<br>`;
+
+      document.getElementById("resumoSimulacao").innerHTML = resumo;
+
+      const ctx = document.getElementById("graficoSimulacao").getContext("2d");
+      if (window.graficoSimulacao) window.graficoSimulacao.destroy();
+      const meses = Array.from(new Set([...receitasFiltradas.map(r => r.data.slice(0, 7)), ...despesasFiltradas.map(d => d.data.slice(0, 7))])).sort();
+      const dadosReceitas = meses.map(m => receitasFiltradas.filter(r => r.data.startsWith(m)).reduce((s, r) => s + r.valor, 0));
+      const dadosDespesas = meses.map(m => despesasFiltradas.filter(d => d.data.startsWith(m)).reduce((s, d) => s + d.valor, 0));
+
+      window.graficoSimulacao = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: meses,
+          datasets: [
+            { label: 'Receitas', data: dadosReceitas, backgroundColor: '#D4AF37' },
+            { label: 'Despesas', data: dadosDespesas, backgroundColor: '#4B0014' }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: { display: true, text: 'Comparativo Mensal' },
+            legend: { position: 'top' }
+          }
+        }
+      });
+    }
+
+    function salvarSimulacaoComoPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const texto = document.getElementById("resumoSimulacao").innerText;
+      const linhas = doc.splitTextToSize(texto, 180);
+      doc.setFont("Helvetica", "normal");
+      doc.setFontSize(12);
+      doc.text(linhas, 15, 20);
+      doc.save("simulacao_midas.pdf");
+    }
+  </script>
 </body>
 </html>
